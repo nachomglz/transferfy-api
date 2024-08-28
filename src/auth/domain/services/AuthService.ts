@@ -6,7 +6,12 @@ export class AuthService implements IAuthService {
 
    findOrCreateUserBySubId = async (subId: string) => {
       let user
-      user = await this.prisma.user.findUnique({ where: { subId } })
+      user = await this.prisma.user.findUnique({
+         where: { subId },
+         include: {
+            SpotifyAuth: true,
+         },
+      })
 
       if (!user) {
          user = await this.prisma.user.create({ data: { subId } })

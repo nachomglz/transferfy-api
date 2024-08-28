@@ -15,8 +15,8 @@ export class AuthController {
    authorize = (req: express.Request, res: express.Response) => {
       if (req.auth) {
          req.log.info({ message: 'Authorized request', auth: req.auth })
-         return res.send('Authorized')
+         return res.json({ message: 'Authorized' })
       }
-      return res.status(401).send('Unaurhorized request')
+      return res.status(401).json({ message: 'Unauthorized request' })
    }
 }
